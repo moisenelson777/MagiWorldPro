@@ -1,49 +1,45 @@
 package com.mw.jeu;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
-
 import com.mw.personnages.*;
 
 public class Configuration {
 
 	Scanner sc = new Scanner(System.in);
-	boolean test = false;
-	Personnage joueur1 = null;
-	Personnage joueur2 = null;
+	Personnage joueur1;
+	Personnage joueur2;
 	
 	public void jouer() {
-		creationJoueurs();
+		System.out.println("Création du personnage du joueur 1");
+		joueur1 = configurationJoueur();
+		System.out.println("Création du personnage du joueur 2");
+		joueur2 = configurationJoueur();
 	}
 	
-	public void creationJoueurs() {
-		System.out.println("Création du personnage du joueur 1");
-		System.out.println("Veuillez choisir la classe de votre personnage (1 : Guerrier, 2 : Rodeur, 3 : Mage)");
+	public Personnage configurationJoueur(){
+		Personnage joueur = null;
 		
+		do {
+			System.out.println("Veuillez choisir la classe de votre personnage (1 : Guerrier, 2 : Rodeur, 3 : Mage)");
+			
+			try {
 			switch(sc.nextInt()) {
-			case 1: joueur1 = new Guerrier();
-			break;
-			case 2 : joueur1 = new Rodeur();
-			break;
-			case 3 : joueur1 = new Mage();
-			break;
-		    default : System.out.println("Veuillez entrer une valeur valide");
+				case 1: joueur = new Guerrier();
+				break;
+				case 2 : joueur = new Rodeur(); 
+				break;
+				case 3 : joueur = new Mage(); 
+				break;
+				default : System.out.println("Veuillez entrer une valeur valide"); 
+				break;
 			}
-			
-			joueur1.caracteresPersonnage();
-			
-			System.out.println("Création du personnage du joueur 2");
-			System.out.println("Veuillez choisir la classe de votre personnage (1 : Guerrier, 2 : Rodeur, 3 : Mage");
-			
-				switch(sc.nextInt()) {
-				case 1: joueur2 = new Guerrier();
-				break;
-				case 2 : joueur2 = new Rodeur();
-				break;
-				case 3 : joueur2 = new Mage();
-				break;
-			    default : System.out.println("Veuillez entrer une valeur valide");
-				}
-				
-				joueur2.caracteresPersonnage();
-	}
+			}catch (InputMismatchException e) {
+				joueur = null;
+				sc.nextLine();
+		}
+	}while(joueur == null);
+		joueur.caracteresPersonnage();
+		return joueur;		
+  }
 }

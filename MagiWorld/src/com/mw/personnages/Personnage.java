@@ -1,4 +1,4 @@
-package com.mw.personnages;
+	package com.mw.personnages;
 
 import java.util.Scanner;
 
