@@ -35,6 +35,7 @@ public class Configuration {
 				break;
 			}
 			}catch (InputMismatchException e) {
+				System.out.println("Veuillez entrer une valeur valide");
 				joueur = null;
 				sc.nextLine();
 		}

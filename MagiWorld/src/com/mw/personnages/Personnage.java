@@ -1,5 +1,6 @@
 	package com.mw.personnages;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public abstract class Personnage {
@@ -65,20 +66,46 @@ public abstract class Personnage {
 	
 	public void caracteresPersonnage() throws BadValueException {
 		
-		System.out.println("Niveau du personnage ?");
-		this.setNiveau(sc.nextInt());
+		//boolean caracteresValides;
+		do {
+		System.out.println();
+		this.setNiveau(checkingCaractere("Niveau du personnage ?"));
 		
-		System.out.println("Force du personnage ?");
-		this.setForce(sc.nextInt());
+		this.setForce(checkingCaractere("Force du personnage ?"));
 		
-		System.out.println("Agilité du personnage ?");
-		this.setAgilite(sc.nextInt());
+		this.setAgilite(checkingCaractere("Agilité du personnage ?"));
 		
-		System.out.println("Intelligence du personnage ?");
-		this.setIntelligence(sc.nextInt());
+		this.setIntelligence(checkingCaractere("Intelligence du personnage ?"));
 		
 		if(this.force+this.agilite+this.intelligence > this.niveau) throw new BadValueException();
+		}while(this.force+this.agilite+this.intelligence > this.niveau);
 		
 		System.out.println(this.toString());
 	}
+	
+	 public int checkingCaractere(String caractere) {
+		 System.out.println(caractere);
+		 boolean caractereValide;
+		 int valeur = 0;
+		 
+		 do {
+	            try {
+	            	valeur = sc.nextInt();
+	                caractereValide = true;
+	                if (valeur < 1) {
+		                System.err.println("Merci de saisir une valeur supérieure ou égale à  1");
+		                caractereValide = false;
+		            }
+		            if (valeur > 100) {
+		                System.err.println("Merci de saisir une valeur inférieure ou égale à  100");
+		                caractereValide = false;
+		            }
+	            } catch (InputMismatchException e) {
+	                sc.next();
+	                System.err.println("Merci de saisir une valeur valide");
+	                caractereValide = false;
+	            }
+	        } while (!caractereValide);
+	        return valeur;
+	    }
 }
