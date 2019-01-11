@@ -37,7 +37,7 @@ public class Configuration {
 			}catch (InputMismatchException e) {
 				System.out.println("Veuillez entrer une valeur valide");
 				joueur = null;
-				sc.nextLine();
+				sc.next();
 		}
 	}while(joueur == null);
 		joueur.caracteresPersonnage();

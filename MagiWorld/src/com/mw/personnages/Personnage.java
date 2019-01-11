@@ -66,7 +66,6 @@ public abstract class Personnage {
 	
 	public void caracteresPersonnage() throws BadValueException {
 		
-		//boolean caracteresValides;
 		do {
 		System.out.println();
 		this.setNiveau(checkingCaractere("Niveau du personnage ?"));
@@ -77,7 +76,9 @@ public abstract class Personnage {
 		
 		this.setIntelligence(checkingCaractere("Intelligence du personnage ?"));
 		
-		if(this.force+this.agilite+this.intelligence > this.niveau) throw new BadValueException();
+		if(this.force+this.agilite+this.intelligence > this.niveau) {
+			System.err.println("La somme force + agilité + intelligence doit etre inférieure ou égale au niveau");
+		}
 		}while(this.force+this.agilite+this.intelligence > this.niveau);
 		
 		System.out.println(this.toString());
